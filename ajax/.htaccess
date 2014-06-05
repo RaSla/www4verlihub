@@ -1,0 +1,6 @@
+<Directory ".">
+    Options Indexes FollowSymLinks Includes MultiViews
+    AllowOverride All
+    Order deny,allow
+    Deny from all
+</Directory>

@@ -1,0 +1,56 @@
+# Apache configuration file
+# httpd.apache.org/docs/2.2/mod/quickreference.html
+
+# Force the latest IE version, in various cases when it may fall back to IE7 mode
+#  github.com/rails/rails/commit/123eb25#commitcomment-118920
+# Use ChromeFrame if it's installed for a better experience for the poor IE folk
+<IfModule mod_setenvif.c>
+  <IfModule mod_headers.c>
+    BrowserMatch MSIE ie
+    Header set X-UA-Compatible "IE=Edge,chrome=1" env=ie
+  </IfModule>
+</IfModule>
+
+<IfModule mod_headers.c>
+# Because X-UA-Compatible isn't sent to non-IE (to save header bytes),
+#   We need to inform proxies that content changes based on UA
+  Header append Vary User-Agent
+# Cache control is set only if mod_headers is enabled, so that's unncessary to declare
+</IfModule>
+
+# Since we're sending far-future expires, we don't need ETags for
+# static content.
+#   developer.yahoo.com/performance/rules.html#etags
+FileETag None
+
+# you probably want www.example.com to forward to example.com -- shorter URLs are sexier.
+#   no-www.org/faq.php?q=class_b
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTPS} !=on
+## URL always without WWW.
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+## SEF
+# URL/post-do
+  RewriteRule post-([a-z_0-9]+)$ /do.php?do=$1&m=post
+# URL/get-do-sub
+  RewriteRule get-([a-z_0-9]+)-(.+)$ /do.php?do=$1&sub=$2
+# URL/get-do
+  RewriteRule get-([a-z_0-9]+)$ /do.php?do=$1
+# URL/page-sub
+  RewriteRule ^([a-z_0-9]+)-(.+)$ /index.php?page=$1&sub=$2
+# URL/page
+  RewriteRule ^([a-z_0-9]+)$ /index.php?page=$1
+</IfModule>
+##########################################################
+
+# use CODEPAGE (utf-8 / windows-1251) encoding for anything served text/plain or text/html
+AddDefaultCharset utf-8
+# force CODEPAGE for a number of file formats
+AddCharset utf-8 .htm .html .php .css .js .xml .json .rss
+
+# We don't need to tell everyone we're apache.
+ServerSignature Off
