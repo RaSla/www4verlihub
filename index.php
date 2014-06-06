@@ -61,11 +61,15 @@ if( !file_exists( "load/$page.php" ) ) $page = "404";
     </div>
 </footer>
 
-<!-- Bootstrap core JavaScript (Placed at the end of the document)
+<!-- JavaScript (Placed at the end of the document)
 ================================================== -->
 <script src="js/jquery-last.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
+
+<!-- Place for Metrics
+======================= -->
+
 
 </body>
 </html>

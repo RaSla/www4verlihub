@@ -6,7 +6,8 @@
 
 @$cmd = mb_substr( $_POST['cmd'], 0, 20 );
 //@$cmd = 'logon';
-if( file_exists( "ajax/$cmd.php") ){
+if( !$vh->pdo ) $astr = "Error: PDO connect";
+else if( file_exists( "ajax/$cmd.php") ){
 // Формирование HEADER
     header( "Content-Type: application/json; Charset=utf-8" );
     @$prms = $_POST["params"];

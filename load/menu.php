@@ -8,8 +8,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand navbar-brand-logo" href="http://<?php print $cfg['org']['url']; ?>" target="_blank"><img src="img/logo_50.png" alt="<?php print $cfg['org']['img_alt']; ?>" height="50"></a>
-            <a class="navbar-brand" href="/"><b>P2P</b></a>
+            <a class="navbar-brand navbar-brand-logo" href="http://<?php print $cfg['org']['url']; ?>" title="<?php print $cfg['org']['name']; ?>" target="_blank"><img src="img/logo_50.png" alt="<?php print $cfg['org']['name']; ?>" height="50"></a>
+            <a class="navbar-brand" href="/" title="Главная"><b>P2P</b></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
